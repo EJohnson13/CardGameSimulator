@@ -12,5 +12,17 @@ namespace CardGameSimulator
         public readonly Face value;
         public readonly Color color;
         public readonly Suit suit;
+
+        public Card(Face Value, Color Color, Suit Suit)
+        {
+            value = Value;
+            color = Color;
+            suit = Suit;
+        }
+
+        public override string ToString()
+        {
+            return $"{value} of {suit} ({color})";
+        }
     }
 }
