@@ -10,10 +10,8 @@ namespace CardGameSimulator.Rummy
     {
         public override List<Card> CreateDeck()
         {
-            // Make an array out of all the card Enums
-            // Make a for loop adding to the list of all the made cards
-
-          
+         
+            List<Card> deck = new List<Card>();
 
             foreach (CardEnums.Color color in Enum.GetValues(typeof(CardEnums.Color)))
             {
@@ -22,14 +20,12 @@ namespace CardGameSimulator.Rummy
                     foreach  (CardEnums.Face face in Enum.GetValues(typeof(CardEnums.Face)))
                     {
                         Card card = new Card(face, color, suit);
+                        deck.Add(card);
                     }
                 }
             }
 
-
-
-
-            throw new NotImplementedException();
+            return deck;
         }
 
         public override Card Deal()

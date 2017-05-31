@@ -11,6 +11,8 @@ namespace CardGameSimulator.Rummy
         public static void Run()
         {
             bool keepgoing = true;
+            RummyDealer dlr = new RummyDealer();
+            List<Card> deck = dlr.CreateDeck();
 
             do
             {
