@@ -36,7 +36,7 @@ namespace CardGameSimulator
                         //run rummy
 
                         Rummy.RummyDriver rumDriver = new Rummy.RummyDriver();
-                        rumDriver.drive();
+                        rumDriver.Drive();
 
                         break;
                     case 4:
