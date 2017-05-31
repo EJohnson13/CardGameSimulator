@@ -45,6 +45,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Blackjack\BlackjackDealer.cs" />
+    <Compile Include="Blackjack\BlackjackLogic.cs" />
+    <Compile Include="Blackjack\BlackjackPlayer.cs" />
     <Compile Include="Card.cs" />
     <Compile Include="CardEnums\Color.cs" />
     <Compile Include="CardEnums\Face.cs" />
@@ -61,7 +64,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Blackjack\" />
     <Folder Include="Durak\" />
     <Folder Include="War\" />
   </ItemGroup>

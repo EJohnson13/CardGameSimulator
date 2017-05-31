@@ -9,7 +9,7 @@ namespace CardGameSimulator.Blackjack
 {
     public class BlackjackDealer : Dealer
     {
-        private List<Card> Deck;
+        private List<Card> Deck = new List<Card>();
 
         public override List<Card> CreateDeck()
         {
