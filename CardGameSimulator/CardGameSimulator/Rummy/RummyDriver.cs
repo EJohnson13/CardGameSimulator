@@ -8,7 +8,7 @@ namespace CardGameSimulator.Rummy
 {
     class RummyDriver
     {
-        public static void drive()
+        public void drive()
         {
             RummyGame game = new RummyGame();
             game.Run();

@@ -13,8 +13,16 @@ namespace CardGameSimulator
         {
             string[] options = { "Blackjack", "Durak", "Rummy", "War" };
             bool loop = true;
+
+            Console.WriteLine(" ");
+            Console.WriteLine("\t\t\t\t\tWelcome to Card Game Simulator");
+            Console.WriteLine("\t\t\t\t\t------------------------------");
+            Console.WriteLine(" ");
+            
             do
             {
+                Console.WriteLine("What game would you like to play?");
+                Console.WriteLine("---------------------------------");
                 int menuSelection = CIO.PromptForMenuSelection(options, true);
                 switch (menuSelection)
                 {
@@ -26,6 +34,10 @@ namespace CardGameSimulator
                         break;
                     case 3:
                         //run rummy
+
+                        Rummy.RummyDriver rumDriver = new Rummy.RummyDriver();
+                        rumDriver.drive();
+
                         break;
                     case 4:
                         //run war
