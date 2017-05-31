@@ -6,22 +6,18 @@ using System.Threading.Tasks;
 
 namespace CardGameSimulator.Rummy
 {
-    class RummyDealer : Dealer
+    class RummyPlayer : IPlayerable
     {
-        public override List<Card> CreateDeck()
-        {
-      
-        }
+        public List<Card> playerHand { get ; set; }
 
-        public override Card Deal()
+        public void AddCard(Card newCard)
         {
             throw new NotImplementedException();
         }
 
-        public override void Shuffle()
+        public Card PlayCard()
         {
             throw new NotImplementedException();
         }
     }
 }
-        

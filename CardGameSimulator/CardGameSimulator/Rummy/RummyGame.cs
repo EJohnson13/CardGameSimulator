@@ -6,18 +6,21 @@ using System.Threading.Tasks;
 
 namespace CardGameSimulator.Rummy
 {
-    class RummyGame : IPlayerable
+    class RummyGame
     {
-        public List<Card> playerHand { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-        public void AddCard(Card newCard)
+        public static void Run()
         {
-            throw new NotImplementedException();
-        }
+            bool keepgoing = true;
 
-        public Card PlayCard()
-        {
-            throw new NotImplementedException();
+            do
+            {
+                Console.WriteLine(" ");
+                Console.WriteLine("Welcome to Rummy!");
+                Console.WriteLine("-----------------");
+                Console.WriteLine(" ");
+
+
+            } while (keepgoing);
         }
     }
 }
