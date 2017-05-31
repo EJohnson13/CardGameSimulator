@@ -9,10 +9,11 @@ namespace CardGameSimulator.Blackjack
     class BlackjackPlayer : IPlayerable
     {
         public List<Card> playerHand { get; set; }
+        public List<Card> PlayerHand = new List<Card>();
 
         public void AddCard(Card newCard)
         {
-            playerHand.Add(newCard);
+            PlayerHand.Add(newCard);
         }
 
         public Card PlayCard()

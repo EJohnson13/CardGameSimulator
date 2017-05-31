@@ -1,0 +1,7 @@
+C:\Users\Elena\Documents\School\OOP\Projects\CardGameSimulator\CardGameSimulator\CardGameSimulator\bin\Debug\CardGameSimulator.exe.config
+C:\Users\Elena\Documents\School\OOP\Projects\CardGameSimulator\CardGameSimulator\CardGameSimulator\bin\Debug\CardGameSimulator.exe
+C:\Users\Elena\Documents\School\OOP\Projects\CardGameSimulator\CardGameSimulator\CardGameSimulator\bin\Debug\CardGameSimulator.pdb
+C:\Users\Elena\Documents\School\OOP\Projects\CardGameSimulator\CardGameSimulator\CardGameSimulator\bin\Debug\JohnsonE_CIO.dll
+C:\Users\Elena\Documents\School\OOP\Projects\CardGameSimulator\CardGameSimulator\CardGameSimulator\obj\Debug\CardGameSimulator.csprojResolveAssemblyReference.cache
+C:\Users\Elena\Documents\School\OOP\Projects\CardGameSimulator\CardGameSimulator\CardGameSimulator\obj\Debug\CardGameSimulator.exe
+C:\Users\Elena\Documents\School\OOP\Projects\CardGameSimulator\CardGameSimulator\CardGameSimulator\obj\Debug\CardGameSimulator.pdb
