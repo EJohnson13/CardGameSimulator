@@ -11,59 +11,61 @@ namespace CardGameSimulator.Rummy
         public void Run()
         {
             bool keepgoing = true;
-            
+            RummyDealer dlr = new RummyDealer();
+            List<Card> deck = dlr.CreateDeck();
+            string input = null;
+            int numOfPlayers = 0;
+
+
             Console.WriteLine(" ");
             Console.WriteLine("Welcome to Rummy!");
             Console.WriteLine("-----------------");
+            Console.WriteLine(" ");
+            Console.WriteLine("Max Players: 6");
+            Console.WriteLine("Min Players: 2");
+            Console.WriteLine(" ");
 
-            do
+            while(keepgoing)
             {
-                
-                Console.WriteLine(" ");
-                Console.WriteLine("What would you like to do?");
-                Console.WriteLine("-------------------------");
-                Console.WriteLine("1) Play Rummy");
-                Console.WriteLine("2) Exit");
 
-                string input = Console.ReadLine();
+                Console.Write("How many Players are there: ");
+        
+                input = Console.ReadLine();
+                int.TryParse(input, out numOfPlayers);
 
-                if (input.Equals("1"))
+                if(numOfPlayers > 6 || numOfPlayers < 2)
                 {
-                    Rummy();
+                    Console.WriteLine("Please enter a valid number of players");
                     keepgoing = true;
-                }
-                else if (input.Equals("2"))
-                {
-                    Console.WriteLine("Good Bye!");
-                    keepgoing = false;
                 }
                 else
                 {
-                    Console.WriteLine(" ");
-                    Console.WriteLine("Please enter valid input");
-                    Console.WriteLine(" ");
-                    keepgoing = true;
+                    keepgoing = false;
                 }
 
+            }
 
-            } while (keepgoing);
+            List<RummyPlayer> players = generatePlayers(numOfPlayers);
         }
 
-
-
-        public void Rummy()
+        public List<RummyPlayer> generatePlayers(int numberOfPlayers)
         {
-            RummyDealer dlr = new RummyDealer();
-            List<Card> deck = dlr.CreateDeck();
 
+            List<RummyPlayer> players = new List<RummyPlayer>();
 
-            foreach(Card card in deck)
+            for (int i = 0; i < numberOfPlayers; i++)
             {
-                Console.WriteLine(card);
+                int counter = i + 1;
+                Console.Write("Player " + counter + " name: ");
+                string name = Console.ReadLine();
+                RummyPlayer player = new RummyPlayer(name);
+                players.Add(player);
             }
 
 
+            return players;
         }
+
 
         public bool CheckForMatches(List<Card> hand)
         {
