@@ -16,7 +16,7 @@ namespace CardGameSimulator.Blackjack
             bool loop = true;
             do
             {
-                Console.WriteLine("\nWelcome to Blackjack! Please select your gamemode");
+                Console.WriteLine("Welcome to Blackjack! Please select your gamemode");
                 int versonSelection = PromptGameVersion();
 
                 switch (versonSelection)
@@ -29,7 +29,7 @@ namespace CardGameSimulator.Blackjack
                         break;
                     case 3:
                         loop = false;
-                        Console.WriteLine("\nGoodbye!");
+                        Console.WriteLine("Goodbye!");
                         break;
                 }
             } while (loop);
@@ -62,12 +62,12 @@ namespace CardGameSimulator.Blackjack
             player2.AddCard(newCard);
 
             //show players their cards and let them choose what to do
-            Console.WriteLine("\nPlayer 1's turn!");
+            Console.WriteLine("Player 1's turn!");
             bool loop = true;
-            int p1Total = CountCards(player1);
+            int p1Total;
             do
             {
-                Console.WriteLine("\nPlayer 2's card \n" + player2.PlayerHand[0] + "\n \nYour cards");
+                p1Total = CountCards(player1);
                 for (int i = 0; i < player1.PlayerHand.Count; i++)
                 {
                     Console.WriteLine(player1.PlayerHand[i]);
@@ -79,7 +79,6 @@ namespace CardGameSimulator.Blackjack
                 {
                     case 1:
                         Hit(player1);
-                        Console.WriteLine("\nThe dealer gave you a " + player1.PlayerHand.Last());
                         break;
                     case 2:
                         loop = false;
@@ -88,20 +87,20 @@ namespace CardGameSimulator.Blackjack
                 p1Total = CountCards(player1);
                 if (p1Total > 21)
                 {
-                    Console.WriteLine("\nOh no you bust!");
+                    Console.WriteLine("Oh no you bust!");
                     loop = false;
                 }
             } while (loop);
 
             Console.Clear();
-            Console.WriteLine("\nPlayer 2's turn!");
+            Console.WriteLine("Player 2's turn!");
             loop = true;
-            int p2Total = CountCards(player2);
+            int p2Total;
             if (p1Total <= 21)
             {
                 do
                 {
-                    Console.WriteLine("\nPlayer 1's card \n" + player1.PlayerHand[0] + "\n \nYour cards");
+                    p2Total = CountCards(player2);
                     for (int i = 0; i < player2.PlayerHand.Count; i++)
                     {
                         Console.WriteLine(player2.PlayerHand[i]);
@@ -113,7 +112,6 @@ namespace CardGameSimulator.Blackjack
                     {
                         case 1:
                             Hit(player2);
-                            Console.WriteLine("\nThe dealer gave you a " + player1.PlayerHand.Last());
                             break;
                         case 2:
                             loop = false;
@@ -122,18 +120,17 @@ namespace CardGameSimulator.Blackjack
                     p2Total = CountCards(player2);
                     if (p2Total > 21)
                     {
-                        Console.WriteLine("\nOh no you bust!");
+                        Console.WriteLine("Oh no you bust!");
                         loop = false;
                     }
                 } while (loop);
 
                 //show both players totals and declare a winner
-                Console.WriteLine("\nPlayer 1: " + p1Total + "\tPlayer 2: " + p2Total);
+                Console.WriteLine("Player 1: " + p1Total + "\tPlayer 2: " + p2Total);
                 if (p1Total > 21 && p2Total <= 21) { Console.WriteLine("Player 2 Wins!"); }
                 else if (p2Total > 21 && p1Total <= 21) { Console.WriteLine("Player 1 Wins!"); }
                 else if (p1Total > p2Total) { Console.WriteLine("Player 1 wins!"); }
                 else if (p2Total > p1Total) { Console.WriteLine("Player 2 wins!"); }
-                else if (p2Total > 21 && p1Total > 21) { Console.WriteLine("You both bust! No one wins!"); }
                 else
                 {
                     string winner = TieBreaker(player1, player2, "Player 1", "Player 2");
@@ -142,7 +139,7 @@ namespace CardGameSimulator.Blackjack
             }
             else
             {
-                Console.WriteLine("\nPlayer 1 Bust!!! Player 2 Wins!!!");
+                Console.WriteLine("Player 1 Bust!!! Player 2 Wins!!!");
             }
         }
 
@@ -166,12 +163,11 @@ namespace CardGameSimulator.Blackjack
             comp1.AddCard(newCard);
 
             //show players their cards and let them choose what to do
-            Console.WriteLine("\nPlayer's turn!");
+            Console.WriteLine("Player's turn!");
             bool loop = true;
             int p1Total;
             do
             {
-                Console.WriteLine("\nComputer's card \n" + comp1.PlayerHand[0] + "\n \nYour cards");
                 p1Total = CountCards(player1);
                 for (int i = 0; i < player1.PlayerHand.Count; i++)
                 {
@@ -184,7 +180,6 @@ namespace CardGameSimulator.Blackjack
                 {
                     case 1:
                         Hit(player1);
-                        Console.WriteLine("\nThe dealer gave you a " + player1.PlayerHand.Last());
                         break;
                     case 2:
                         loop = false;
@@ -193,7 +188,7 @@ namespace CardGameSimulator.Blackjack
                 p1Total = CountCards(player1);
                 if (p1Total > 21)
                 {
-                    Console.WriteLine("\nOh no you bust!");
+                    Console.WriteLine("Oh no you bust!");
                     loop = false;
                 }
             } while (loop);
@@ -201,21 +196,19 @@ namespace CardGameSimulator.Blackjack
             //let computer go
             loop = true;
             int compTotal = CountCards(comp1);
-            if (p1Total <= 21)
+            if (p1Total > 21)
             {
-                Console.WriteLine("\nComputer's turn!!!");
+                Console.WriteLine("Computer's turn!!!");
                 do
                 {
                     compTotal = CountCards(comp1);
 
                     if (compTotal <= 17)
                     {
-                        Console.WriteLine("\nThe computer hit!");
                         Hit(comp1);
                     }
                     else
                     {
-                        Console.WriteLine("\nThe computer stayed!");
                         loop = false;
                     }
 
@@ -227,7 +220,6 @@ namespace CardGameSimulator.Blackjack
             else if (compTotal > 21 && p1Total <= 21) { Console.WriteLine("Player 1 Wins!"); }
             else if (p1Total > compTotal) { Console.WriteLine("Player 1 wins!"); }
             else if (compTotal > p1Total) { Console.WriteLine("Computer wins!"); }
-            else if (compTotal > 21 && p1Total > 21) { Console.WriteLine("You both bust! No one wins!"); }
             else
             {
                 string winner = TieBreaker(player1, comp1, "Player", "Computer");
