@@ -127,9 +127,15 @@ namespace CardGameSimulator.Blackjack
 
                 //show both players totals and declare a winner
                 Console.WriteLine("Player 1: " + p1Total + "\tPlayer 2: " + p2Total);
-                if (p1Total > p2Total) { Console.WriteLine("Player 1 wins!!!"); }
-                else if (p2Total > p1Total) { Console.WriteLine("Player 2 wins!!!"); }
-                else { Console.WriteLine("Tie!!!"); }
+                if (p1Total > 21 && p2Total <= 21) { Console.WriteLine("Player 2 Wins!"); }
+                else if (p2Total > 21 && p1Total <= 21) { Console.WriteLine("Player 1 Wins!"); }
+                else if (p1Total > p2Total) { Console.WriteLine("Player 1 wins!"); }
+                else if (p2Total > p1Total) { Console.WriteLine("Player 2 wins!"); }
+                else
+                {
+                    string winner = TieBreaker(player1, player2, "Player 1", "Player 2");
+                    Console.WriteLine(winner + " wins!");
+                }                
             }
             else
             {
@@ -139,7 +145,86 @@ namespace CardGameSimulator.Blackjack
 
         public void PlayPvC()
         {
+            BlackjackPlayer player1 = new BlackjackPlayer();
+            BlackjackPlayer comp1 = new BlackjackPlayer();
+            dealer.CreateDeck();
+            dealer.Shuffle();
 
+            //1st deal
+            //deal 2 cards to player1 
+            Card newCard = dealer.Deal();
+            player1.AddCard(newCard);
+            newCard = dealer.Deal();
+            player1.AddCard(newCard);
+            //deal 2 cards to computer
+            newCard = dealer.Deal();
+            comp1.AddCard(newCard);
+            newCard = dealer.Deal();
+            comp1.AddCard(newCard);
+
+            //show players their cards and let them choose what to do
+            Console.WriteLine("Player's turn!");
+            bool loop = true;
+            int p1Total;
+            do
+            {
+                p1Total = CountCards(player1);
+                for (int i = 0; i < player1.PlayerHand.Count; i++)
+                {
+                    Console.WriteLine(player1.PlayerHand[i]);
+                }
+                Console.WriteLine("Total: " + p1Total);
+                string[] options = { "Hit", "Stay" };
+                int selection = CIO.PromptForMenuSelection(options, false);
+                switch (selection)
+                {
+                    case 1:
+                        Hit(player1);
+                        break;
+                    case 2:
+                        loop = false;
+                        break;
+                }
+                p1Total = CountCards(player1);
+                if (p1Total > 21)
+                {
+                    Console.WriteLine("Oh no you bust!");
+                    loop = false;
+                }
+            } while (loop);
+
+            //let computer go
+            loop = true;
+            int compTotal = CountCards(comp1);
+            if (p1Total > 21)
+            {
+                Console.WriteLine("Computer's turn!!!");
+                do
+                {
+                    compTotal = CountCards(comp1);
+
+                    if (compTotal <= 17)
+                    {
+                        Hit(comp1);
+                    }
+                    else
+                    {
+                        loop = false;
+                    }
+
+                } while (loop);
+            }
+            //show both players totals and declare a winner
+            Console.WriteLine("Player 1: " + p1Total + "\tComputer: " + compTotal);
+            if (p1Total > 21 && compTotal <= 21) { Console.WriteLine("Computer Wins!"); }
+            else if (compTotal > 21 && p1Total <= 21) { Console.WriteLine("Player 1 Wins!"); }
+            else if (p1Total > compTotal) { Console.WriteLine("Player 1 wins!"); }
+            else if (compTotal > p1Total) { Console.WriteLine("Computer wins!"); }
+            else
+            {
+                string winner = TieBreaker(player1, comp1, "Player", "Computer");
+                Console.WriteLine(winner + " wins!");
+            }
         }
 
         public void Hit(BlackjackPlayer player)
@@ -181,6 +266,42 @@ namespace CardGameSimulator.Blackjack
             }
 
             return total;
+        }
+
+        public string TieBreaker(BlackjackPlayer player1, BlackjackPlayer player2, string p1Name, string p2Name)
+        {
+            int p1Highest = 0;
+            int p1CardNum = 0;
+            int p2Highest = 0;
+            int p2CardNum = 0;
+            string winner = "";
+
+            for(int i = 0; i < player1.PlayerHand.Count; i++)
+            {
+                if((int)(player1.PlayerHand[i].value) * 10 > p1Highest)
+                {
+                    p1Highest = (int)(player1.PlayerHand[i].value) * 10;
+                    p1CardNum = i;
+                }
+            }
+            for (int i = 0; i < player2.PlayerHand.Count; i++)
+            {
+                if ((int)(player2.PlayerHand[i].value) * 10 > p2Highest)
+                {
+                    p2Highest = (int)(player2.PlayerHand[i].value) * 10;
+                    p2CardNum = i;
+                }
+            }
+
+            if(p1Highest > p2Highest) { winner = p1Name; }
+            else if (p2Highest > p1Highest) { winner = p2Name; }
+            else
+            {
+               if((int)(player1.PlayerHand[p1CardNum].suit) < (int)(player2.PlayerHand[p2CardNum].suit)) { winner = p1Name; }
+                else { winner = p2Name; }
+            }
+
+            return winner;
         }
     }
 }
