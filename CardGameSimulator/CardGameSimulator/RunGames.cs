@@ -27,7 +27,8 @@ namespace CardGameSimulator
                 switch (menuSelection)
                 {
                     case 1:
-                        //Run Blackjack
+                        Blackjack.BlackjackLogic run = new Blackjack.BlackjackLogic();
+                        run.RunGame();
                         break;
                     case 2:
                         //run Durak
