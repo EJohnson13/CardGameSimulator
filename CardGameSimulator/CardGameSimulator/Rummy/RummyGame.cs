@@ -45,12 +45,38 @@ namespace CardGameSimulator.Rummy
 
             }
 
-            PrintDeck(deck);
-
             List<RummyPlayer> players = generatePlayers(numOfPlayers);
             deck = dlr.ShuffleCards(deck);
+            deck = dlr.DealCards(players, deck);
 
-            PrintDeck(deck);
+
+
+            // This cod will print what is in the random deck that was not dealt
+            // Along with the hands of all the players
+
+            //foreach (RummyPlayer player in players)
+            //{
+            //    Console.WriteLine("Hands");
+            //    Console.WriteLine(" ");
+            //    player.PrintPlayerHand();
+            //    Console.WriteLine(" ");
+            //}
+
+            //foreach(Card card in deck)
+            //{
+            //    Console.WriteLine(card);
+            //}
+
+
+            Card previouslyDiscarded = null;
+
+
+            foreach (RummyPlayer player in players)
+            {
+                previouslyDiscarded = Turn(player, deck, previouslyDiscarded);
+            }
+               
+            
             
         }
         
@@ -89,9 +115,50 @@ namespace CardGameSimulator.Rummy
 
         
 
-        public void Turn(RummyPlayer player)
+        public Card Turn(RummyPlayer player, List<Card> deck, Card previouslyDiscarded)
         {
+            bool keepgoing = true;
+            string input = null;
 
+            Console.WriteLine(" ");
+            Console.WriteLine("Current Hand for " + player.GetName());
+            Console.WriteLine("--------------------------------------");
+            player.PrintPlayerHand();
+            Console.WriteLine(" ");
+            Console.WriteLine("Card previously Discarded: " + previouslyDiscarded);
+
+
+            while (keepgoing)
+            {
+
+                Console.WriteLine(" ");
+                Console.WriteLine("What action would you like to take? ");
+                Console.WriteLine("1) Draw off the top of remainder pile.");
+                Console.WriteLine("2) Draw previously discarded card.");
+
+                input = Console.ReadLine();
+
+                if (input.Equals("1"))
+                {
+
+                }
+                else if (input.Equals("2"))
+                {
+
+                }
+                else
+                {
+                    Console.WriteLine(" ");
+                    Console.WriteLine("Please enter valid input");
+                    Console.WriteLine(" ");
+                }
+            }
+
+
+
+
+
+            return previouslyDiscarded;
         }
 
         public bool CheckForMatches(List<Card> hand)

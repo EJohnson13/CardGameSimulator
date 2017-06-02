@@ -9,7 +9,8 @@ namespace CardGameSimulator.Rummy
     class RummyPlayer : IPlayerable
     {
         private string name = "Player";
-        public List<Card> playerHand { get; set; }
+        public List<Card> phand = new List<Card>();
+        List<Card> IPlayerable.playerHand { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public RummyPlayer(string name)
         {
@@ -23,14 +24,27 @@ namespace CardGameSimulator.Rummy
             this.name = name;
         }
 
+        public string GetName()
+        {
+            return name;
+        }
+
         public void AddCard(Card newCard)
         {
-            throw new NotImplementedException();
+            phand.Add(newCard);
         }
 
         public Card PlayCard()
         {
             throw new NotImplementedException();
+        }
+
+        public void PrintPlayerHand()
+        {
+            foreach(Card card in phand)
+            {
+                Console.WriteLine(card);
+            }
         }
     }
 }
