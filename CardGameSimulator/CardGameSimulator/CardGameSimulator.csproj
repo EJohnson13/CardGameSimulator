@@ -57,7 +57,9 @@
     <Compile Include="IPlayerable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rummy\RummyDealer.cs" />
+    <Compile Include="Rummy\RummyDriver.cs" />
     <Compile Include="Rummy\RummyGame.cs" />
+    <Compile Include="Rummy\RummyPlayer.cs" />
     <Compile Include="RunGames.cs" />
   </ItemGroup>
   <ItemGroup>
