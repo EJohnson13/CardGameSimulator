@@ -27,7 +27,7 @@ namespace CardGameSimulator.Rummy
 
             while(keepgoing)
             {
-
+                Console.WriteLine(" ");
                 Console.Write("How many Players are there: ");
         
                 input = Console.ReadLine();
@@ -45,8 +45,29 @@ namespace CardGameSimulator.Rummy
 
             }
 
+            PrintDeck(deck);
+
             List<RummyPlayer> players = generatePlayers(numOfPlayers);
+            deck = dlr.ShuffleCards(deck);
+
+            PrintDeck(deck);
+            
         }
+        
+
+
+        public void PrintDeck(List<Card> deck)
+        {
+            int counter = 0;
+            foreach (Card card in deck)
+            {
+                counter++;
+                Console.WriteLine(card +" Card #: "+ counter);
+            }
+            Console.WriteLine("");
+        }
+
+
 
         public List<RummyPlayer> generatePlayers(int numberOfPlayers)
         {
@@ -62,10 +83,16 @@ namespace CardGameSimulator.Rummy
                 players.Add(player);
             }
 
-
             return players;
         }
 
+
+        
+
+        public void Turn(RummyPlayer player)
+        {
+
+        }
 
         public bool CheckForMatches(List<Card> hand)
         {

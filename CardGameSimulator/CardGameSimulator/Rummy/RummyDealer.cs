@@ -28,6 +28,42 @@ namespace CardGameSimulator.Rummy
             return deck;
         }
 
+        public void DealCards(List<RummyPlayer> players, List<Card> shuffledDeck )
+        {
+
+            foreach(RummyPlayer player in players)
+            {
+               
+            }
+
+        }
+
+
+
+
+
+        public List<Card> ShuffleCards(List<Card> unShuffledDeck)
+        {
+            Random rand = new Random();
+            List<Card> shuffledDeck = new List<Card>();
+            Card[] unShuffed = unShuffledDeck.ToArray();
+            int ran = 0;
+
+            for (int i = 0; i < unShuffed.Length; i++)
+            {
+                ran = rand.Next(i, unShuffed.Length + 1);
+                Card card = unShuffed[ran];
+                shuffledDeck.Add(card);
+            }
+            
+            return shuffledDeck;
+        }
+
+
+
+
+
+
         public override Card Deal()
         {
             throw new NotImplementedException();
